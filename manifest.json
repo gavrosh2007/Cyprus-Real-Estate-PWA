@@ -1,0 +1,24 @@
+{
+  "name": "Hermes Estate Cyprus",
+  "short_name": "Hermes Estate",
+  "start_url": "/Cyprus-Real-Estate-PWA/index.html",
+  "scope": "/Cyprus-Real-Estate-PWA/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "theme_color": "#e8491d",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/Cyprus-Real-Estate-PWA/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Cyprus-Real-Estate-PWA/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
