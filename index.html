@@ -155,6 +155,9 @@
             gap: 0.7rem;
             cursor: pointer;
             transition: 0.2s;
+            color: white;
+            font-weight: 500;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
         }
         .instruction-box li:hover { background: rgba(255,255,255,0.35); }
         
@@ -348,7 +351,15 @@
             cursor: pointer;
             margin-top: 0.5rem;
         }
-        .close-modal { background: transparent !important; border: 1px solid #e8491d !important; }
+        .close-modal {
+            background: rgba(0,0,0,0.8) !important;
+            border: 1px solid #e8491d !important;
+            color: white !important;
+        }
+        .close-modal:hover {
+            background: rgba(232,73,29,0.9) !important;
+            color: white !important;
+        }
         
         .dropzone {
             border: 2px dashed rgba(232,73,29,0.6);
@@ -389,6 +400,7 @@
             display: flex;
             align-items: center;
             gap: 0.8rem;
+            color: white;
         }
         .owner-item:hover { background: rgba(232,73,29,0.3); transform: translateX(4px); }
         footer { text-align: center; margin-top: 2rem; font-size: 0.7rem; color: #aaa; }
@@ -522,7 +534,6 @@
 <script>
     const PLACEHOLDER_SVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect width='200' height='150' fill='%232c2c3a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23e8491d' font-size='14'%3E📷 Нет фото%3C/text%3E%3C/svg%3E";
     
-    // Музыка с обработкой ошибок
     let audio = null;
     let isPlaying = false;
     function initAudio() {
@@ -647,12 +658,66 @@
 
     function loadProperties() {
         const saved = localStorage.getItem('estate_properties');
-        if (saved) properties = JSON.parse(saved);
-        else {
-            properties = [{
-                id: Date.now(), name: "Владелец", ownership: "personal", price: "750,000", location: "Pyrgos, Limassol",
-                area: "350", landArea: "600", contact: "+357 99453575", photos: [], docLink: "", createdAt: new Date().toLocaleDateString()
-            }];
+        if (saved) {
+            properties = JSON.parse(saved);
+            let changed = false;
+            
+            // Ищем главный объект (по локации или имени)
+            const mainProperty = properties.find(p => p.location === "Pyrgos, Limassol" || p.name === "Владелец");
+            if (mainProperty && (!mainProperty.photos || mainProperty.photos.length === 0 || mainProperty.photos[0] === PLACEHOLDER_SVG)) {
+                mainProperty.photos = ["house.jpg"];  // ← Если файл house.jpeg, замените здесь на "house.jpeg"
+                changed = true;
+            }
+            
+            // Добавляем второй объект-заглушку, если нет
+            const hasSecond = properties.some(p => p.photos && p.photos[0] === "1.jpeg");
+            if (!hasSecond) {
+                properties.push({
+                    id: Date.now() + 1,
+                    name: "Заглушка",
+                    ownership: "personal",
+                    price: "500,000",
+                    location: "Новая локация",
+                    area: "200",
+                    landArea: "300",
+                    contact: "+357 12345678",
+                    photos: ["1.jpeg"],
+                    docLink: "",
+                    createdAt: new Date().toLocaleDateString()
+                });
+                changed = true;
+            }
+            
+            if (changed) saveProperties();
+        } else {
+            properties = [
+                {
+                    id: Date.now(),
+                    name: "Владелец",
+                    ownership: "personal",
+                    price: "750,000",
+                    location: "Pyrgos, Limassol",
+                    area: "350",
+                    landArea: "600",
+                    contact: "+357 99453575",
+                    photos: ["house.jpg"],  // ← здесь тоже при необходимости замените на "house.jpeg"
+                    docLink: "",
+                    createdAt: new Date().toLocaleDateString()
+                },
+                {
+                    id: Date.now() + 1,
+                    name: "Заглушка",
+                    ownership: "personal",
+                    price: "500,000",
+                    location: "Новая локация",
+                    area: "200",
+                    landArea: "300",
+                    contact: "+357 12345678",
+                    photos: ["1.jpeg"],
+                    docLink: "",
+                    createdAt: new Date().toLocaleDateString()
+                }
+            ];
             saveProperties();
         }
         renderProperties();
