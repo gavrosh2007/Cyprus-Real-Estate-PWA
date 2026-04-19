@@ -1,6 +1,6 @@
 {
-  "name": "Hermes Estate Cyprus",
-  "short_name": "Hermes Estate",
+  "name": "Недвижимость",
+  "short_name": "Estate",
   "start_url": "/Cyprus-Real-Estate-PWA/index.html",
   "scope": "/Cyprus-Real-Estate-PWA/",
   "display": "standalone",

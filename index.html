@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Недвижимость Кипр</title>
+    <title>Недвижимость</title>
+    
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Estate Cyprus">
+    <meta name="apple-mobile-web-app-title" content="Estate">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#e8491d">
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-weight: 400;
-            background: url('https://images.pexels.com/photos/101808/pexels-photo-101808.jpeg') no-repeat center center fixed;
-            background-size: cover;
+            font-family: Arial, sans-serif;
             min-height: 100vh;
             position: relative;
-            font-size: 18px;
-            color: #f0f0f0;
+            background: url('https://images.pexels.com/photos/101808/pexels-photo-101808.jpeg') no-repeat center center fixed;
+            background-size: cover;
         }
         body::before {
             content: '';
@@ -29,15 +29,23 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.45);
-            z-index: 0;
+            background: inherit;
+            filter: blur(3px);
+            z-index: -1;
+            transform: scale(1.02);
         }
-        .container { position: relative; z-index: 1; max-width: 1400px; margin: 0 auto; padding: 2rem 1.5rem; }
 
-        /* Шапка */
-        .main-header {
-            background: rgba(0, 0, 0, 0.25);
-            backdrop-filter: blur(12px);
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
             padding: 0.8rem 1.5rem;
             border-radius: 60px;
             margin-bottom: 2rem;
@@ -46,64 +54,64 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 1rem;
-            border: 1px solid rgba(232,73,29,0.2);
+            border: 1px solid rgba(232,73,29, 0.3);
         }
-        .logo-area { display: flex; align-items: center; gap: 0.8rem; }
-        .site-icon { width: 36px; height: 36px; object-fit: cover; border-radius: 8px; }
-        .logo-area h1 { font-size: 1.4rem; font-weight: 500; color: rgba(232,73,29,0.85); }
-        .nav-links { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
-        .lang-switch { display: flex; gap: 0.5rem; }
-        .lang-btn {
-            background: rgba(0,0,0,0.4);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(232,73,29,0.3);
-            padding: 0.4rem 0.9rem;
-            border-radius: 40px;
-            font-weight: 500;
-            font-size: 0.85rem;
-            cursor: pointer;
-            color: #fff;
-        }
-        .lang-btn.active { background: rgba(232,73,29,0.7); }
-        .nav-btn {
-            background: none;
-            border: none;
-            font-size: 0.95rem;
-            color: #e0e0e0;
-            cursor: pointer;
-            padding: 0.5rem 1rem;
-            border-radius: 40px;
-        }
-        .nav-btn:hover { background: rgba(232,73,29,0.3); color: #e8491d; }
-        .contact-header-btn { background: rgba(232,73,29,0.7); color: white; }
-        .contact-header-btn:hover { background: rgba(232,73,29,0.9); }
 
-        /* PWA кнопка */
-        .pwa-section { text-align: center; margin-bottom: 2rem; }
-        .install-tooltip { position: relative; display: inline-block; }
-        .pwa-icon-btn {
-            background: rgba(0,0,0,0.35);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(232,73,29,0.3);
-            border-radius: 60px;
-            cursor: pointer;
-            padding: 0.5rem 1.5rem;
-            display: inline-flex;
+        .logo {
+            display: flex;
             align-items: center;
             gap: 0.8rem;
-            font-size: 1rem;
-            font-weight: 500;
+        }
+        .music-btn {
+            background: rgba(232,73,29, 0.7);
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+        }
+        .music-btn:hover { background: rgba(232,73,29, 0.9); }
+
+        .lang-switch { display: flex; gap: 0.8rem; }
+        .lang-btn {
+            background: rgba(0,0,0,0.5);
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: #fff;
+        }
+        .lang-btn.active { background: #e8491d; }
+        .lang-btn:hover { background: rgba(232,73,29,0.6); }
+
+        .install-area { text-align: center; margin: 1rem 0 2rem; }
+        .install-tooltip { position: relative; display: inline-block; }
+        .pwa-icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.9rem;
+            font-weight: 600;
             color: #e8491d;
         }
-        .pwa-icon-btn img { width: 64px; height: 64px; border-radius: 12px; }
-        .pwa-icon-btn:hover { transform: scale(1.02); background: rgba(0,0,0,0.5); }
+        .pwa-icon-btn img { width: 96px; height: 96px; border-radius: 12px; }
+        .pwa-icon-btn:hover { transform: scale(1.05); }
         .tooltip-text {
             visibility: hidden;
-            background-color: #333;
+            background: #333;
             color: #fff;
-            text-align: center;
-            border-radius: 8px;
-            padding: 6px 10px;
+            border-radius: 6px;
+            padding: 5px 10px;
             position: absolute;
             bottom: 125%;
             left: 50%;
@@ -111,122 +119,147 @@
             white-space: nowrap;
             opacity: 0;
             transition: opacity 0.3s;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
         .install-tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
+        .install-note { margin-top: 0.5rem; font-size: 0.7rem; color: #ccc; }
 
-        /* Hero с храмом */
         .hero-section {
-            position: relative;
-            margin-bottom: 2rem;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
             border-radius: 32px;
-            overflow: hidden;
-            min-height: 180px;
-        }
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.15;
-            filter: blur(6px);
-            z-index: 0;
-        }
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            text-align: center;
             padding: 2rem;
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(4px);
-            border-radius: 32px;
-        }
-        .hero-content h1 { font-size: 2.5rem; font-weight: 500; color: rgba(232,73,29,0.85); margin-bottom: 0.5rem; }
-        .hero-content .subhead { color: #e0e0e0; font-size: 1.1rem; }
-
-        /* Инструкция */
-        .instruction-box {
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(12px);
-            border-radius: 32px;
-            padding: 1.5rem;
             margin-bottom: 2rem;
             text-align: center;
-            border: 1px solid rgba(232,73,29,0.2);
+            border: 1px solid rgba(232,73,29, 0.3);
         }
-        .instruction-box h3 { color: rgba(232,73,29,0.85); margin-bottom: 1rem; font-size: 1.3rem; }
-        .instruction-box ul { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; }
-        .instruction-box li { background: rgba(0,0,0,0.4); padding: 0.4rem 1rem; border-radius: 40px; font-size: 0.85rem; }
+        .hero-section h1 {
+            font-size: 2.5rem;
+            color: #e8491d;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.7), 4px 4px 0px rgba(0, 0, 0, 0.5);
+        }
+        .hero-section p { color: #f0f0f0; font-size: 1.1rem; }
 
-        /* Кнопка добавления */
+        /* ИНСТРУКЦИЯ: УВЕЛИЧЕННЫЙ БЛОК, КНОПКИ ПОЛУПРОЗРАЧНЫЕ, БЕЗ ТУЛТИПА */
+        .instruction-box {
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(10px);
+            border-radius: 32px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid rgba(232,73,29, 0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .instruction-box h3 {
+            color: #e8491d;
+            margin-bottom: 1.5rem;
+            font-size: 1.6rem;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .instruction-box ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem;
+        }
+        .instruction-box li {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            font-weight: 500;
+            padding: 0.7rem 1.3rem;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 1rem;
+        }
+        .instruction-box li:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: scale(1.02);
+            border-color: #e8491d;
+        }
+        .instruction-box li span {
+            color: #ffffff;
+        }
+
         .add-property-btn {
-            background: rgba(232,73,29,0.7);
+            background: rgba(232,73,29, 0.7);
             color: white;
             border: none;
-            padding: 12px 24px;
+            padding: 0.8rem;
             font-size: 1.1rem;
-            font-weight: 500;
-            border-radius: 60px;
+            border-radius: 50px;
             cursor: pointer;
             margin-bottom: 2rem;
             width: 100%;
-        }
-        .add-property-btn:hover { background: rgba(232,73,29,0.9); }
-
-        /* Карточки */
-        .properties-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2rem; margin-top: 2rem; }
-        .property-card {
-            background: rgba(0, 0, 0, 0.35);
-            backdrop-filter: blur(12px);
-            border-radius: 28px;
-            overflow: hidden;
-            border: 1px solid rgba(232,73,29,0.2);
+            font-weight: 600;
             transition: 0.2s;
         }
-        .property-card:hover { transform: translateY(-5px); border-color: rgba(232,73,29,0.6); }
-        .property-img { width: 100%; height: 220px; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .add-property-btn:hover { background: rgba(232,73,29, 0.9); }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .property-card {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(232,73,29, 0.2);
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .property-card:hover { transform: translateY(-5px); border-color: rgba(232,73,29, 0.6); }
+        .property-img { width: 100%; height: 220px; background: rgba(0,0,0,0.3); overflow: hidden; }
         .property-img img { width: 100%; height: 100%; object-fit: cover; }
-        .property-info { padding: 1.2rem; }
-        .property-title { font-size: 1.2rem; font-weight: 500; color: rgba(232,73,29,0.85); }
-        .property-price { font-size: 1.4rem; font-weight: 600; margin: 0.4rem 0; color: white; }
-        .property-details { font-size: 0.85rem; color: #d0d0d0; margin: 0.2rem 0; }
+        .property-info { padding: 1rem; }
+        .property-title { font-size: 1.2rem; font-weight: bold; color: #e8491d; }
+        .property-price { font-size: 1.3rem; font-weight: bold; margin: 0.3rem 0; color: #fff; }
+        .property-details { font-size: 0.8rem; color: #f0f0f0; margin: 0.2rem 0; }
         .delete-btn {
-            background: rgba(232,73,29,0.3);
+            background: rgba(232,73,29, 0.3);
             border: none;
             color: white;
             padding: 0.3rem 0.8rem;
-            border-radius: 40px;
+            border-radius: 20px;
             cursor: pointer;
-            font-size: 0.8rem;
-            margin-top: 0.6rem;
+            font-size: 0.7rem;
+            margin-top: 0.5rem;
         }
-        .delete-btn:hover { background: rgba(232,73,29,0.6); }
+        .delete-btn:hover { background: rgba(232,73,29, 0.6); }
 
-        /* Контакты */
         .site-contacts {
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(12px);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
             border-radius: 28px;
             padding: 1.5rem;
-            margin-top: 2.5rem;
+            margin-top: 2rem;
             text-align: center;
-            border: 1px solid rgba(232,73,29,0.2);
+            border: 1px solid rgba(232,73,29, 0.3);
         }
-        .site-contacts h3 { color: rgba(232,73,29,0.85); margin-bottom: 1rem; font-size: 1.3rem; }
-        .contacts-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; }
+        .site-contacts h3 { color: #e8491d; margin-bottom: 1rem; }
+        .contacts-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
         .contact-item {
-            background: rgba(0,0,0,0.4);
-            padding: 0.4rem 1rem;
+            background: rgba(0,0,0,0.5);
+            padding: 0.3rem 0.8rem;
             border-radius: 40px;
-            font-size: 0.85rem;
-            color: #e0e0e0;
+            font-size: 0.8rem;
+            color: #ddd;
             text-decoration: none;
         }
-        .contact-item:hover { background: rgba(232,73,29,0.7); color: white; }
+        .contact-item:hover { background: #e8491d; color: white; }
 
-        /* Модалка */
         .modal {
             display: none;
             position: fixed;
@@ -242,101 +275,119 @@
         }
         .modal.active { display: flex; }
         .modal-content {
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(16px);
+            background: rgba(30, 30, 40, 0.95);
+            backdrop-filter: blur(12px);
             border-radius: 28px;
-            padding: 1.8rem;
-            max-width: 550px;
+            padding: 1.5rem;
+            max-width: 500px;
             width: 90%;
             max-height: 85vh;
             overflow-y: auto;
-            border: 1px solid rgba(232,73,29,0.6);
+            border: 1px solid rgba(232,73,29, 0.5);
+            color: #f0f0f0;
         }
-        .modal-content h3 { color: rgba(232,73,29,0.85); margin-bottom: 1.2rem; font-size: 1.4rem; }
-        .modal-content input, .modal-content select {
+        .modal-content h3 { color: #e8491d; margin-bottom: 1rem; }
+        .modal-content input, .modal-content select, .modal-content textarea {
             width: 100%;
-            padding: 0.8rem;
+            padding: 0.7rem;
             margin-bottom: 0.8rem;
-            border-radius: 16px;
-            border: 1px solid rgba(232,73,29,0.4);
-            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(232,73,29, 0.5);
+            background: rgba(255,255,255,0.15);
             color: white;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
+        .modal-content input::placeholder, .modal-content textarea::placeholder { color: #ccc; }
         .modal-content button {
-            background: rgba(232,73,29,0.7);
+            background: rgba(232,73,29, 0.7);
             color: white;
             border: none;
-            padding: 0.8rem;
-            border-radius: 50px;
+            padding: 0.7rem;
+            border-radius: 40px;
             width: 100%;
             cursor: pointer;
             margin-top: 0.5rem;
+            font-weight: bold;
         }
-        .modal-content button:hover { background: rgba(232,73,29,0.9); }
-        .close-modal { background: transparent !important; border: 1px solid rgba(232,73,29,0.6) !important; }
+        .modal-content button:hover { background: rgba(232,73,29, 0.95); }
+        .close-modal { background: transparent !important; border: 1px solid #e8491d !important; }
         .photo-preview { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
-        .photo-preview img { width: 60px; height: 60px; object-fit: cover; border-radius: 10px; }
+        .photo-preview img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
 
-        footer { text-align: center; margin-top: 3rem; padding: 1rem; color: #aaa; font-size: 0.7rem; }
+        #viewModal .modal-content { background: rgba(30, 30, 40, 0.95); color: #f0f0f0; }
+        #viewModal .modal-content .property-details { margin: 0.5rem 0; font-size: 1rem; }
+        #viewModal .modal-content a { color: #e8491d; }
+        #viewModal .modal-content .static-links {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(232,73,29, 0.5);
+            text-align: center;
+        }
+
+        footer { text-align: center; margin-top: 2rem; font-size: 0.7rem; color: #aaa; }
         .lang-content { display: none; }
         .lang-content.active { display: block; }
         @media (max-width: 700px) {
             .container { padding: 1rem; }
-            .hero-content h1 { font-size: 1.8rem; }
-            .main-header { flex-direction: column; text-align: center; }
+            header { flex-direction: column; text-align: center; }
+            .hero-section h1 { font-size: 1.8rem; }
+            .instruction-box { padding: 1rem; }
+            .instruction-box li { padding: 0.4rem 1rem; font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="main-header">
-        <div class="logo-area">
-            <img src="1.jpg" alt="home" class="site-icon" onerror="this.src='1.jpg'">
-            <h1 id="siteTitle">Недвижимость Кипр</h1>
+    <header>
+        <div class="logo">
+            <button id="musicToggleBtn" class="music-btn">🎵 Play Music</button>
         </div>
-        <div class="nav-links">
-            <div class="lang-switch">
-                <button class="lang-btn" data-lang="ru">🇷🇺</button>
-                <button class="lang-btn" data-lang="en">🇬🇧</button>
-            </div>
-            <button class="nav-btn contact-header-btn" id="showContactsBtn">📞 Контакты</button>
+        <div class="lang-switch">
+            <button class="lang-btn" data-lang="ru">🇷🇺 Русский</button>
+            <button class="lang-btn" data-lang="en">🇬🇧 English</button>
         </div>
-    </div>
+    </header>
 
-    <div class="pwa-section">
+    <div class="install-area">
         <div class="install-tooltip">
             <button id="pwa-install-icon" class="pwa-icon-btn">
-                <img src="icon-192x192.png" alt="Install">
+                <img src="icon-192x192.png" alt="Установить" width="96" height="96">
                 <span id="pwaBtnText">Установить приложение</span>
             </button>
-            <span class="tooltip-text" id="pwaTooltip">💡 Нажмите — установите как приложение</span>
+            <span class="tooltip-text" id="pwaTooltip">💡 Нажмите — установите как приложение.<br>• Chrome/Edge: появится диалог.<br>• iPhone: Поделиться → На экран «Домой».</span>
         </div>
+        <div class="install-note" id="pwaNote">✅ Нажмите на иконку монитора со стрелкой в адресной строке, чтобы установить приложение. На iPhone: Поделиться → На экран «Домой».</div>
     </div>
 
     <div class="hero-section">
-        <img src="6.jpg" alt="temple" class="hero-bg" onerror="this.style.display='none'">
-        <div class="hero-content">
-            <h1 id="mainTitle">Недвижимость Кипр</h1>
-            <div class="subhead" id="subheadText">Продажа домов, вилл, квартир — добавляйте свои объекты</div>
-        </div>
+        <h1 id="mainTitle">Недвижимость</h1>
+        <p id="subText">Продажа домов, вилл, квартир — добавляйте свои объекты</p>
     </div>
 
     <div id="ru-content" class="lang-content active">
         <div class="instruction-box">
             <h3>📸 Как добавить фото объекта</h3>
-            <ul><li>📱 Загрузите фото с телефона (JPG/PNG)</li><li>🏠 Снимайте при хорошем свете</li><li>🖼️ Покажите фасад, комнаты, участок</li></ul>
+            <ul>
+                <li class="instruction-btn">📷 <span id="labelCameraRu">Камера</span></li>
+                <li class="instruction-btn">📱 <span id="labelPhoneRu">Телефон</span></li>
+                <li class="instruction-btn">💻 <span id="labelComputerRu">Компьютер</span></li>
+                <li class="instruction-btn">🌐 <span id="labelWebsiteRu">Сайт</span></li>
+                <li class="instruction-btn">📘 <span id="labelBrochureRu">Буклет</span></li>
+            </ul>
         </div>
+
         <button class="add-property-btn" id="addPropertyBtnRu">➕ Выставить недвижимость на продажу</button>
-        <h2 style="color: rgba(232,73,29,0.8); margin: 1rem 0 0 0; font-size: 1.3rem;">📋 Объекты на продажу</h2>
+
+        <h2 id="propertiesTitleRu" style="color: #e8491d; margin-bottom: 0.5rem;">📋 Объекты на продажу</h2>
         <div id="propertiesGrid" class="properties-grid"></div>
-        <div id="siteContacts" class="site-contacts">
-            <h3>📞 Контакты Hermes Estate</h3>
+
+        <div class="site-contacts">
+            <h3>📞 Контакты</h3>
             <div class="contacts-grid">
                 <a href="tel:+35799453575" class="contact-item">📞 +357 99 453575</a>
                 <a href="tel:+35799486511" class="contact-item">📞 +357 99 486511</a>
                 <a href="https://wa.me/35799453575" class="contact-item">💬 WhatsApp</a>
-                <a href="mailto:gavrosh2007@gmail.com" class="contact-item">✉️ gavrosh2007@gmail.com</a>
+                <a href="mailto:gavrosh2007@gmail.com" class="contact-item">✉️ Email</a>
                 <a href="https://t.me/faufautua" class="contact-item">📱 Telegram</a>
             </div>
         </div>
@@ -345,35 +396,46 @@
     <div id="en-content" class="lang-content">
         <div class="instruction-box">
             <h3>📸 How to add property photos</h3>
-            <ul><li>📱 Upload from phone (JPG/PNG)</li><li>🏠 Shoot in good light</li><li>🖼️ Show facade, rooms, land</li></ul>
+            <ul>
+                <li class="instruction-btn">📷 <span id="labelCameraEn">Camera</span></li>
+                <li class="instruction-btn">📱 <span id="labelPhoneEn">Phone</span></li>
+                <li class="instruction-btn">💻 <span id="labelComputerEn">Computer</span></li>
+                <li class="instruction-btn">🌐 <span id="labelWebsiteEn">Website</span></li>
+                <li class="instruction-btn">📘 <span id="labelBrochureEn">Brochure</span></li>
+            </ul>
         </div>
+
         <button class="add-property-btn" id="addPropertyBtnEn">➕ List property for sale</button>
-        <h2 style="color: rgba(232,73,29,0.8); margin: 1rem 0 0 0; font-size: 1.3rem;">📋 Properties for sale</h2>
+
+        <h2 id="propertiesTitleEn" style="color: #e8491d; margin-bottom: 0.5rem;">📋 Properties for sale</h2>
         <div id="propertiesGridEn" class="properties-grid"></div>
-        <div id="siteContactsEn" class="site-contacts">
-            <h3>📞 Hermes Estate Contacts</h3>
+
+        <div class="site-contacts">
+            <h3>📞 Contacts</h3>
             <div class="contacts-grid">
                 <a href="tel:+35799453575" class="contact-item">📞 +357 99 453575</a>
                 <a href="tel:+35799486511" class="contact-item">📞 +357 99 486511</a>
                 <a href="https://wa.me/35799453575" class="contact-item">💬 WhatsApp</a>
-                <a href="mailto:gavrosh2007@gmail.com" class="contact-item">✉️ gavrosh2007@gmail.com</a>
+                <a href="mailto:gavrosh2007@gmail.com" class="contact-item">✉️ Email</a>
                 <a href="https://t.me/faufautua" class="contact-item">📱 Telegram</a>
             </div>
         </div>
     </div>
-    <footer><p id="footerText">© 2025 Hermes Estate Cyprus | Все объявления добавляются пользователями</p></footer>
+
+    <footer><span id="footerText">© 2025 Недвижимость | Все объявления добавляются пользователями</span></footer>
 </div>
 
 <div id="propertyModal" class="modal">
     <div class="modal-content">
         <h3 id="modalTitle">📝 Заполните анкету</h3>
         <input type="text" id="ownerName" placeholder="Ваше имя *">
-        <select id="ownership"><option value="personal" id="ownershipPersonal">Личная собственность</option><option value="third" id="ownershipThird">Третьего лица</option></select>
+        <select id="ownership"><option value="personal">Личная собственность</option><option value="third">Третьего лица</option></select>
         <input type="text" id="price" placeholder="Цена объекта (€) *">
         <input type="text" id="location" placeholder="Локация *">
         <input type="text" id="area" placeholder="Площадь дома (м²) *">
         <input type="text" id="landArea" placeholder="Площадь участка (м²)">
         <input type="text" id="contact" placeholder="Контакт *">
+        <input type="text" id="docLink" placeholder="Ссылка на документы (Google Drive/Dropbox)">
         <input type="file" id="photos" accept="image/*" multiple>
         <div id="photoPreview" class="photo-preview"></div>
         <button id="submitProperty">✅ Опубликовать объявление</button>
@@ -381,22 +443,406 @@
     </div>
 </div>
 
+<div id="viewModal" class="modal">
+    <div class="modal-content">
+        <h3 id="viewTitle">📄 Информация об объекте</h3>
+        <div id="viewContent"></div>
+        <div id="staticLinksBlock" class="static-links"></div>
+        <button class="close-view-modal">✖ Закрыть</button>
+    </div>
+</div>
+
 <script>
+    // МУЗЫКА
+    const audio = new Audio('https://www.dropbox.com/scl/fi/ztj1cde5ffl34xfimzp9i/piki-piki-dance-tiktok-viral-dance-128-ytshorts.savetube.me.mp3?rlkey=iybcbj4b4gpqpmn38ca67glzn&dl=1');
+    audio.loop = true;
+    let isPlaying = false;
+    const musicBtn = document.getElementById('musicToggleBtn');
+    if (musicBtn) {
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                musicBtn.innerHTML = '🎵 Play Music';
+            } else {
+                audio.play().catch(e => console.log('Audio error:', e));
+                musicBtn.innerHTML = '⏸ Pause Music';
+            }
+            isPlaying = !isPlaying;
+        });
+    }
+
+    const DEMO_PHOTO_URL = 'house.jpg';
+    const STATIC_SITE_RU = 'https://gavrosh2007.github.io/Pyrgos-House-Sale-R/';
+    const STATIC_SITE_EN = 'https://gavrosh2007.github.io/Pyrgos-House-Sale/';
+
     const translations = {
-        ru: { pwaBtn: 'Установить приложение', pwaTooltip: '💡 Нажмите — установите как приложение', footer: '© 2025 Hermes Estate Cyprus | Все объявления добавляются пользователями', modalTitle: '📝 Заполните анкету', ownershipPersonal: 'Личная собственность', ownershipThird: 'Третьего лица', pricePlaceholder: 'Цена объекта (€) *', locationPlaceholder: 'Локация *', areaPlaceholder: 'Площадь дома (м²) *', landPlaceholder: 'Площадь участка (м²)', contactPlaceholder: 'Контакт *', submitBtn: '✅ Опубликовать объявление', closeBtn: '✖ Закрыть', deleteConfirm: 'Удалить объявление?', emptyFields: 'Заполните все обязательные поля (*)', success: '✅ Объявление опубликовано!', noProperties: 'Нет объявлений. Будьте первым!', ownerNamePlaceholder: 'Ваше имя *', siteTitle: 'Недвижимость Кипр', mainTitle: 'Недвижимость Кипр', subhead: 'Продажа домов, вилл, квартир — добавляйте свои объекты' },
-        en: { pwaBtn: 'Install App', pwaTooltip: '💡 Click — install as app', footer: '© 2025 Hermes Estate Cyprus | All listings are user-submitted', modalTitle: '📝 Fill the form', ownershipPersonal: 'Personal property', ownershipThird: 'Third party', pricePlaceholder: 'Property price (€) *', locationPlaceholder: 'Location *', areaPlaceholder: 'House area (m²) *', landPlaceholder: 'Land area (m²)', contactPlaceholder: 'Contact *', submitBtn: '✅ Publish listing', closeBtn: '✖ Close', deleteConfirm: 'Delete this listing?', emptyFields: 'Please fill all required fields (*)', success: '✅ Listing published!', noProperties: 'No listings yet. Be the first!', ownerNamePlaceholder: 'Your name *', siteTitle: 'Cyprus Real Estate', mainTitle: 'Cyprus Real Estate', subhead: 'Sell houses, villas, apartments — add your listings' }
+        ru: {
+            pwaBtn: 'Установить приложение',
+            pwaTooltip: '💡 Нажмите — установите как приложение.\n• Chrome/Edge: появится диалог.\n• iPhone: Поделиться → На экран «Домой».',
+            pwaNote: '✅ Нажмите на иконку монитора со стрелкой в адресной строке, чтобы установить приложение. На iPhone: Поделиться → На экран «Домой».',
+            footer: '© 2025 Недвижимость | Все объявления добавляются пользователями',
+            modalTitle: '📝 Заполните анкету',
+            submitBtn: '✅ Опубликовать объявление',
+            closeBtn: '✖ Закрыть',
+            deleteConfirm: 'Удалить объявление?',
+            emptyFields: 'Заполните все обязательные поля (*)',
+            success: '✅ Объявление опубликовано!',
+            noProperties: 'Нет объявлений. Будьте первым!',
+            siteTitle: 'Недвижимость',
+            mainTitle: 'Недвижимость',
+            subText: 'Продажа домов, вилл, квартир — добавляйте свои объекты',
+            propertiesTitle: '📋 Объекты на продажу',
+            addBtn: '➕ Выставить недвижимость на продажу',
+            contactsTitle: '📞 Контакты',
+            ownerNamePlaceholder: 'Ваше имя *',
+            pricePlaceholder: 'Цена объекта (€) *',
+            locationPlaceholder: 'Локация *',
+            areaPlaceholder: 'Площадь дома (м²) *',
+            landPlaceholder: 'Площадь участка (м²)',
+            contactPlaceholder: 'Контакт *',
+            docLinkPlaceholder: 'Ссылка на документы (Google Drive/Dropbox)',
+            viewTitle: '📄 Информация об объекте',
+            viewClose: '✖ Закрыть',
+            fieldName: 'Имя',
+            fieldOwnership: 'Собственность',
+            fieldPersonal: 'личная',
+            fieldThird: 'по доверенности',
+            fieldPrice: 'Цена',
+            fieldLocation: 'Локация',
+            fieldArea: 'Площадь дома',
+            fieldLandArea: 'Участок',
+            fieldContact: 'Контакт',
+            fieldCreated: 'Дата',
+            fieldDocs: 'Документы',
+            labelCamera: 'Камера',
+            labelPhone: 'Телефон',
+            labelComputer: 'Компьютер',
+            labelWebsite: 'Сайт',
+            labelBrochure: 'Буклет',
+            staticLinksTitle: 'Полная информация о доме (Pyrgos, Limassol):',
+            staticLinkRu: 'Русская версия сайта',
+            staticLinkEn: 'Английская версия сайта',
+            instructionAlert: 'Рекомендации по фото:\n\n• Формат: JPG или PNG\n• Размер: до 5 МБ (фото с телефона подходят)\n• Снимайте при хорошем свете\n• Покажите фасад, комнаты, участок'
+        },
+        en: {
+            pwaBtn: 'Install App',
+            pwaTooltip: '💡 Click — install as app.\n• Chrome/Edge: dialog appears.\n• iPhone: Share → Add to Home Screen.',
+            pwaNote: '✅ Click the monitor icon with a down arrow in the address bar to install the app. On iPhone: Share → Add to Home Screen.',
+            footer: '© 2025 Real Estate | All listings are user-submitted',
+            modalTitle: '📝 Fill the form',
+            submitBtn: '✅ Publish listing',
+            closeBtn: '✖ Close',
+            deleteConfirm: 'Delete this listing?',
+            emptyFields: 'Please fill all required fields (*)',
+            success: '✅ Listing published!',
+            noProperties: 'No listings yet. Be the first!',
+            siteTitle: 'Real Estate',
+            mainTitle: 'Real Estate',
+            subText: 'Sell houses, villas, apartments — add your listings',
+            propertiesTitle: '📋 Properties for sale',
+            addBtn: '➕ List property for sale',
+            contactsTitle: '📞 Contacts',
+            ownerNamePlaceholder: 'Your name *',
+            pricePlaceholder: 'Property price (€) *',
+            locationPlaceholder: 'Location *',
+            areaPlaceholder: 'House area (m²) *',
+            landPlaceholder: 'Land area (m²)',
+            contactPlaceholder: 'Contact *',
+            docLinkPlaceholder: 'Documents link (Google Drive/Dropbox)',
+            viewTitle: '📄 Property information',
+            viewClose: '✖ Close',
+            fieldName: 'Name',
+            fieldOwnership: 'Ownership',
+            fieldPersonal: 'personal',
+            fieldThird: 'by proxy',
+            fieldPrice: 'Price',
+            fieldLocation: 'Location',
+            fieldArea: 'House area',
+            fieldLandArea: 'Land area',
+            fieldContact: 'Contact',
+            fieldCreated: 'Date',
+            fieldDocs: 'Documents',
+            labelCamera: 'Camera',
+            labelPhone: 'Phone',
+            labelComputer: 'Computer',
+            labelWebsite: 'Website',
+            labelBrochure: 'Brochure',
+            staticLinksTitle: 'Full information about the house (Pyrgos, Limassol):',
+            staticLinkRu: 'Russian version',
+            staticLinkEn: 'English version',
+            instructionAlert: 'Photo recommendations:\n\n• Format: JPG or PNG\n• Size: up to 5 MB (phone photos are fine)\n• Shoot in good light\n• Show facade, rooms, land'
+        }
     };
 
-    let currentLang = 'ru', properties = [];
-    const DEFAULT_IMAGE = '1.jpg';
+    let currentLang = 'ru';
+    let properties = [];
+    let deferredPrompt;
 
-    function updateUI(lang) {
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+    });
+
+    function showPWAInstructions() {
+        alert(currentLang === 'ru' 
+            ? 'Для установки приложения:\n\n• На компьютере: нажмите на иконку монитора со стрелкой в адресной строке.\n• На iPhone: нажмите "Поделиться" → "На экран «Домой»".\n• На Android: нажмите на иконку монитора со стрелкой в адресной строке.'
+            : 'To install the app:\n\n• On computer: click the monitor icon with a down arrow in the address bar.\n• On iPhone: tap "Share" → "Add to Home Screen".\n• On Android: tap the monitor icon with a down arrow in the address bar.');
+    }
+
+    document.getElementById('pwa-install-icon')?.addEventListener('click', async () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            await deferredPrompt.userChoice;
+            deferredPrompt = null;
+        } else {
+            showPWAInstructions();
+        }
+    });
+
+    function bindInstructionButtons() {
+        document.querySelectorAll('.instruction-btn').forEach(btn => {
+            btn.removeEventListener('click', instructionHandler);
+            btn.addEventListener('click', instructionHandler);
+        });
+    }
+    function instructionHandler() {
+        alert(translations[currentLang].instructionAlert);
+    }
+
+    function updateModalLanguage() {
+        const t = translations[currentLang];
+        document.getElementById('ownerName').placeholder = t.ownerNamePlaceholder;
+        document.getElementById('price').placeholder = t.pricePlaceholder;
+        document.getElementById('location').placeholder = t.locationPlaceholder;
+        document.getElementById('area').placeholder = t.areaPlaceholder;
+        document.getElementById('landArea').placeholder = t.landPlaceholder;
+        document.getElementById('contact').placeholder = t.contactPlaceholder;
+        document.getElementById('docLink').placeholder = t.docLinkPlaceholder;
+        document.getElementById('modalTitle').textContent = t.modalTitle;
+        document.getElementById('submitProperty').textContent = t.submitBtn;
+        document.querySelector('#propertyModal .close-modal').textContent = t.closeBtn;
+        const ownershipSelect = document.getElementById('ownership');
+        ownershipSelect.options[0].text = t.ownershipPersonal;
+        ownershipSelect.options[1].text = t.ownershipThird;
+    }
+
+    function setLanguage(lang) {
         currentLang = lang;
-        document.getElementById('pwaBtnText').textContent = translations[lang].pwaBtn;
-        document.getElementById('pwaTooltip').innerHTML = translations[lang].pwaTooltip;
-        document.getElementById('footerText').textContent = translations[lang].footer;
-        document.getElementById('modalTitle').textContent = translations[lang].modalTitle;
-        document.getElementById('ownershipPersonal').textContent = translations[lang].ownershipPersonal;
-        document.getElementById('ownershipThird').textContent = translations[lang].ownershipThird;
-        document.getElementById('price').placeholder = translations[lang].pricePlaceholder;
-        document.getElementById('
+        const t = translations[lang];
+        document.getElementById('siteTitle').textContent = t.siteTitle;
+        document.getElementById('mainTitle').textContent = t.mainTitle;
+        document.getElementById('subText').textContent = t.subText;
+        document.getElementById('propertiesTitleRu').textContent = t.propertiesTitle;
+        document.getElementById('propertiesTitleEn').textContent = t.propertiesTitle;
+        document.getElementById('pwaBtnText').textContent = t.pwaBtn;
+        document.getElementById('pwaTooltip').innerHTML = t.pwaTooltip;
+        document.getElementById('pwaNote').textContent = t.pwaNote;
+        document.getElementById('footerText').textContent = t.footer;
+        
+        document.getElementById('labelCameraRu').textContent = t.labelCamera;
+        document.getElementById('labelPhoneRu').textContent = t.labelPhone;
+        document.getElementById('labelComputerRu').textContent = t.labelComputer;
+        document.getElementById('labelWebsiteRu').textContent = t.labelWebsite;
+        document.getElementById('labelBrochureRu').textContent = t.labelBrochure;
+        document.getElementById('labelCameraEn').textContent = t.labelCamera;
+        document.getElementById('labelPhoneEn').textContent = t.labelPhone;
+        document.getElementById('labelComputerEn').textContent = t.labelComputer;
+        document.getElementById('labelWebsiteEn').textContent = t.labelWebsite;
+        document.getElementById('labelBrochureEn').textContent = t.labelBrochure;
+        
+        document.getElementById('addPropertyBtnRu').textContent = t.addBtn;
+        document.getElementById('addPropertyBtnEn').textContent = t.addBtn;
+        document.querySelector('#ru-content .site-contacts h3').textContent = t.contactsTitle;
+        document.querySelector('#en-content .site-contacts h3').textContent = t.contactsTitle;
+        document.getElementById('viewTitle').textContent = t.viewTitle;
+        document.querySelector('#viewModal .close-view-modal').textContent = t.viewClose;
+        
+        updateModalLanguage();
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+        document.getElementById('ru-content').classList.toggle('active', lang === 'ru');
+        document.getElementById('en-content').classList.toggle('active', lang === 'en');
+        bindInstructionButtons();
+        renderProperties();
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
+
+    function loadProperties() {
+        const saved = localStorage.getItem('estate_properties');
+        if (saved) {
+            properties = JSON.parse(saved);
+        } else {
+            properties = [{
+                id: Date.now(),
+                name: "Владелец",
+                ownership: "personal",
+                price: "750,000",
+                location: "Pyrgos, Limassol",
+                area: "350",
+                landArea: "600",
+                contact: "+357 99453575",
+                photos: [DEMO_PHOTO_URL],
+                docLink: STATIC_SITE_RU,
+                createdAt: new Date().toLocaleDateString()
+            }];
+            saveProperties();
+        }
+        renderProperties();
+    }
+
+    function saveProperties() { localStorage.setItem('estate_properties', JSON.stringify(properties)); }
+
+    function viewProperty(prop) {
+        const t = translations[currentLang];
+        const ownershipText = prop.ownership === 'personal' ? t.fieldPersonal : t.fieldThird;
+        const photoUrl = (prop.photos && prop.photos[0]) ? prop.photos[0] : DEMO_PHOTO_URL;
+        const docsLink = prop.docLink ? prop.docLink : (currentLang === 'ru' ? STATIC_SITE_RU : STATIC_SITE_EN);
+        
+        const content = `
+            <div style="margin-bottom: 1rem;"><img src="${photoUrl}" alt="property" style="width:100%; max-height:300px; object-fit:cover; border-radius:16px;"></div>
+            <div class="property-details"><strong>${t.fieldName}:</strong> ${prop.name}</div>
+            <div class="property-details"><strong>${t.fieldOwnership}:</strong> ${ownershipText}</div>
+            <div class="property-details"><strong>${t.fieldPrice}:</strong> €${prop.price}</div>
+            <div class="property-details"><strong>${t.fieldLocation}:</strong> ${prop.location}</div>
+            <div class="property-details"><strong>${t.fieldArea}:</strong> ${prop.area} м²</div>
+            ${prop.landArea ? `<div class="property-details"><strong>${t.fieldLandArea}:</strong> ${prop.landArea} м²</div>` : ''}
+            <div class="property-details"><strong>${t.fieldContact}:</strong> ${prop.contact}</div>
+            <div class="property-details"><strong>${t.fieldCreated}:</strong> ${prop.createdAt}</div>
+            <div class="property-details"><strong>${t.fieldDocs}:</strong> <a href="${docsLink}" target="_blank" style="color:#e8491d;">📄 ${t.fieldDocs}</a></div>
+        `;
+        document.getElementById('viewContent').innerHTML = content;
+        
+        const staticBlock = document.getElementById('staticLinksBlock');
+        staticBlock.innerHTML = `
+            <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(232,73,29, 0.5); text-align: center;">
+                <p><strong>${t.staticLinksTitle}</strong></p>
+                <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 0.5rem;">
+                    <a href="${STATIC_SITE_RU}" target="_blank" style="color:#e8491d;">📘 ${t.staticLinkRu}</a>
+                    <a href="${STATIC_SITE_EN}" target="_blank" style="color:#e8491d;">🌐 ${t.staticLinkEn}</a>
+                </div>
+            </div>
+        `;
+        
+        document.getElementById('viewModal').classList.add('active');
+    }
+
+    function renderProperties() {
+        const gridRu = document.getElementById('propertiesGrid'), gridEn = document.getElementById('propertiesGridEn');
+        if (!gridRu || !gridEn) return;
+        if (properties.length === 0) {
+            gridRu.innerHTML = `<div style="text-align:center; color:#aaa;">${translations[currentLang].noProperties}</div>`;
+            gridEn.innerHTML = `<div style="text-align:center; color:#aaa;">${translations[currentLang].noProperties}</div>`;
+            return;
+        }
+        const cardHTML = (prop, lang) => {
+            const photoUrl = (prop.photos && prop.photos[0]) ? prop.photos[0] : DEMO_PHOTO_URL;
+            const ownershipText = lang === 'ru' ? (prop.ownership === 'personal' ? 'личная' : 'по доверенности') : (prop.ownership === 'personal' ? 'personal' : 'by proxy');
+            const propData = JSON.stringify(prop).replace(/'/g, "\\'");
+            return `
+            <div class="property-card" onclick='viewProperty(${propData})'>
+                <div class="property-img"><img src="${photoUrl}" alt="property" onerror="this.src='${DEMO_PHOTO_URL}'"></div>
+                <div class="property-info">
+                    <div class="property-title">${prop.location}</div>
+                    <div class="property-price">€${prop.price}</div>
+                    <div class="property-details">📐 ${prop.area} м² ${prop.landArea ? `+ участок ${prop.landArea} м²` : ''}</div>
+                    <div class="property-details">👤 ${prop.name} | ${ownershipText}</div>
+                    <div class="property-details">📞 ${prop.contact}</div>
+                    <div class="property-details">📅 ${prop.createdAt}</div>
+                    <button class="delete-btn" onclick="event.stopPropagation(); deleteProperty(${prop.id})">🗑 ${lang === 'ru' ? 'Удалить' : 'Delete'}</button>
+                </div>
+            </div>`;
+        };
+        gridRu.innerHTML = properties.map(p => cardHTML(p, 'ru')).join('');
+        gridEn.innerHTML = properties.map(p => cardHTML(p, 'en')).join('');
+    }
+
+    window.deleteProperty = function(id) {
+        if (confirm(translations[currentLang].deleteConfirm)) {
+            properties = properties.filter(p => p.id !== id);
+            saveProperties(); renderProperties();
+        }
+    };
+
+    const modal = document.getElementById('propertyModal'), viewModal = document.getElementById('viewModal');
+    const addBtnRu = document.getElementById('addPropertyBtnRu'), addBtnEn = document.getElementById('addPropertyBtnEn');
+    const closeBtns = document.querySelectorAll('#propertyModal .close-modal');
+    const closeViewBtns = document.querySelectorAll('#viewModal .close-view-modal');
+    const submitBtn = document.getElementById('submitProperty');
+    const photoInput = document.getElementById('photos'), photoPreview = document.getElementById('photoPreview');
+
+    addBtnRu?.addEventListener('click', () => modal.classList.add('active'));
+    addBtnEn?.addEventListener('click', () => modal.classList.add('active'));
+    closeBtns.forEach(btn => btn.addEventListener('click', () => {
+        modal.classList.remove('active');
+        photoPreview.innerHTML = ''; photoInput.value = '';
+    }));
+    closeViewBtns.forEach(btn => btn.addEventListener('click', () => viewModal.classList.remove('active')));
+    modal?.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+    viewModal?.addEventListener('click', (e) => { if (e.target === viewModal) viewModal.classList.remove('active'); });
+
+    photoInput?.addEventListener('change', (e) => {
+        photoPreview.innerHTML = '';
+        Array.from(e.target.files).forEach(file => {
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                const img = document.createElement('img');
+                img.src = ev.target.result;
+                img.style.cssText = 'width:60px;height:60px;object-fit:cover;border-radius:8px;';
+                photoPreview.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+
+    submitBtn?.addEventListener('click', () => {
+        const name = document.getElementById('ownerName').value.trim();
+        const ownership = document.getElementById('ownership').value;
+        const price = document.getElementById('price').value.trim();
+        const location = document.getElementById('location').value.trim();
+        const area = document.getElementById('area').value.trim();
+        const landArea = document.getElementById('landArea').value.trim();
+        const contact = document.getElementById('contact').value.trim();
+        const docLink = document.getElementById('docLink').value.trim();
+        if (!name || !price || !location || !area || !contact) {
+            alert(translations[currentLang].emptyFields); return;
+        }
+        if (photoInput.files && photoInput.files.length > 0) {
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                properties.unshift({
+                    id: Date.now(), name, ownership, price, location, area,
+                    landArea: landArea || '', contact, docLink: docLink || '',
+                    photos: [ev.target.result], createdAt: new Date().toLocaleDateString()
+                });
+                saveProperties(); renderProperties();
+                modal.classList.remove('active');
+                alert(translations[currentLang].success);
+            };
+            reader.readAsDataURL(photoInput.files[0]);
+        } else {
+            properties.unshift({
+                id: Date.now(), name, ownership, price, location, area,
+                landArea: landArea || '', contact, docLink: docLink || '',
+                photos: [DEMO_PHOTO_URL], createdAt: new Date().toLocaleDateString()
+            });
+            saveProperties(); renderProperties();
+            modal.classList.remove('active');
+            alert(translations[currentLang].success);
+        }
+        document.getElementById('ownerName').value = ''; document.getElementById('price').value = '';
+        document.getElementById('location').value = ''; document.getElementById('area').value = '';
+        document.getElementById('landArea').value = ''; document.getElementById('contact').value = '';
+        document.getElementById('docLink').value = ''; photoInput.value = ''; photoPreview.innerHTML = '';
+    });
+
+    loadProperties(); setLanguage('ru');
+    bindInstructionButtons();
+
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js', { scope: './' })
+            .then(reg => console.log('✅ SW registered:', reg.scope))
+            .catch(err => console.log('❌ SW error:', err));
+    }
+</script>
+</body>
+</html>
