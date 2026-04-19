@@ -1,5 +1,5 @@
-const CACHE_NAME = 'estate-v1';
-const BASE_PATH = '/Cyprus-Real-Estate-PWA/';
+const CACHE_NAME = 'estate-v2';
+const BASE_PATH = '/Real-Estate-PWA/';
 
 const urlsToCache = [
   BASE_PATH,

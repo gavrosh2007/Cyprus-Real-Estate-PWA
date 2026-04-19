@@ -350,7 +350,6 @@
         }
         .close-modal { background: transparent !important; border: 1px solid #e8491d !important; }
         
-        /* Drag-and-drop зона */
         .dropzone {
             border: 2px dashed rgba(232,73,29,0.6);
             border-radius: 20px;
@@ -420,7 +419,7 @@
     <div class="install-area">
         <div class="install-tooltip">
             <button id="pwa-install-icon" class="pwa-icon-btn">
-                <img src="icon-192x192.png" width="96" height="96">
+                <img src="icon-192x192.png" width="96" height="96" alt="Иконка приложения">
                 <span id="pwaBtnText">Установить приложение</span>
             </button>
             <span class="tooltip-text" id="pwaTooltip">💡 Нажмите — установите как приложение.</span>
@@ -486,7 +485,7 @@
     <footer><span id="footerText">© 2025 Недвижимость | Все объявления добавляются пользователями</span></footer>
 </div>
 
-<!-- Модалка добавления с drag-and-drop -->
+<!-- Модалка добавления -->
 <div id="propertyModal" class="modal">
     <div class="modal-content">
         <h3 id="modalTitle">📝 Заполните анкету</h3>
@@ -499,7 +498,6 @@
         <input type="text" id="contact" placeholder="Контакт *">
         <input type="text" id="docLink" placeholder="Ссылка на документы">
         
-        <!-- Drag-and-drop зона -->
         <div id="dropzone" class="dropzone">
             <p>📸 Перетащите файлы сюда или нажмите для выбора</p>
             <p style="font-size:0.8rem;">(можно несколько, первое фото будет обложкой)</p>
@@ -522,20 +520,28 @@
 </div>
 
 <script>
-    // ----- Плейсхолдер для фото (без сетевых запросов) -----
     const PLACEHOLDER_SVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect width='200' height='150' fill='%232c2c3a'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23e8491d' font-size='14'%3E📷 Нет фото%3C/text%3E%3C/svg%3E";
     
-    // МУЗЫКА
-    const audio = new Audio('https://www.dropbox.com/scl/fi/ztj1cde5ffl34xfimzp9i/piki-piki-dance-tiktok-viral-dance-128-ytshorts.savetube.me.mp3?rlkey=iybcbj4b4gpqpmn38ca67glzn&dl=1');
-    audio.loop = true;
+    // Музыка с обработкой ошибок
+    let audio = null;
     let isPlaying = false;
+    function initAudio() {
+        audio = new Audio('https://www.dropbox.com/scl/fi/ztj1cde5ffl34xfimzp9i/piki-piki-dance-tiktok-viral-dance-128-ytshorts.savetube.me.mp3?rlkey=iybcbj4b4gpqpmn38ca67glzn&dl=1');
+        audio.loop = true;
+        audio.onerror = () => console.warn('Audio failed to load');
+    }
     document.getElementById('musicToggleBtn')?.addEventListener('click', () => {
-        if (isPlaying) { audio.pause(); document.getElementById('musicToggleBtn').innerHTML = '🎵 Play Music'; }
-        else { audio.play().catch(e=>console.log); document.getElementById('musicToggleBtn').innerHTML = '⏸ Pause Music'; }
+        if (!audio) initAudio();
+        if (isPlaying) {
+            audio.pause();
+            document.getElementById('musicToggleBtn').innerHTML = '🎵 Play Music';
+        } else {
+            audio.play().catch(e => console.warn('Audio play blocked:', e));
+            document.getElementById('musicToggleBtn').innerHTML = '⏸ Pause Music';
+        }
         isPlaying = !isPlaying;
     });
 
-    // Ссылки на статичные сайты (для модального окна объекта)
     const STATIC_SITE_RU = 'https://gavrosh2007.github.io/Pyrgos-House-Sale-R/';
     const STATIC_SITE_EN = 'https://gavrosh2007.github.io/Pyrgos-House-Sale/';
 
@@ -627,8 +633,8 @@
         labels.forEach(l => { if(document.getElementById(l+'Ru')) document.getElementById(l+'Ru').textContent = t[l]; if(document.getElementById(l+'En')) document.getElementById(l+'En').textContent = t[l]; });
         document.getElementById('addPropertyBtnRu').textContent = t.addBtn;
         document.getElementById('addPropertyBtnEn').textContent = t.addBtn;
-        document.querySelector('#ru-content .site-contacts h3').textContent = t.contactsTitle;
-        document.querySelector('#en-content .site-contacts h3').textContent = t.contactsTitle;
+        if(document.querySelector('#ru-content .site-contacts h3')) document.querySelector('#ru-content .site-contacts h3').textContent = t.contactsTitle;
+        if(document.querySelector('#en-content .site-contacts h3')) document.querySelector('#en-content .site-contacts h3').textContent = t.contactsTitle;
         updateModalLanguage();
         document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
         document.getElementById('ru-content').classList.toggle('active', lang === 'ru');
@@ -692,7 +698,6 @@
 
     function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
 
-    // Модальное окно просмотра объекта с фото и статичными ссылками
     window.viewProperty = function(prop) {
         const t = translations[currentLang];
         const ownText = prop.ownership === 'personal' ? t.fieldPersonal : t.fieldThird;
@@ -772,7 +777,6 @@
         if (e.target === document.getElementById('ownersModal')) document.getElementById('ownersModal').classList.remove('active');
     });
 
-    // ----- Drag-and-drop логика -----
     let selectedFiles = [];
     const dropzone = document.getElementById('dropzone');
     const fileInput = document.getElementById('fileInput');
@@ -814,7 +818,6 @@
         });
     }
     
-    // Публикация объекта
     document.getElementById('submitProperty')?.addEventListener('click', () => {
         const name = document.getElementById('ownerName').value.trim();
         const ownership = document.getElementById('ownership').value;
@@ -851,7 +854,6 @@
             renderProperties();
             document.getElementById('propertyModal').classList.remove('active');
             alert(translations[currentLang].success);
-            // Очистка формы
             document.getElementById('ownerName').value = '';
             document.getElementById('price').value = '';
             document.getElementById('location').value = '';
@@ -865,9 +867,12 @@
         }
     });
 
-    loadProperties(); setLanguage('ru');
+    loadProperties(); 
+    setLanguage('ru');
     bindInstructionButtons();
-    if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(console.log);
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(err => console.warn('SW registration failed:', err));
+    }
 </script>
 </body>
 </html>

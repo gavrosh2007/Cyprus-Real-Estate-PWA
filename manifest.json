@@ -1,21 +1,21 @@
 {
   "name": "Недвижимость",
   "short_name": "Estate",
-  "start_url": "/Cyprus-Real-Estate-PWA/index.html",
-  "scope": "/Cyprus-Real-Estate-PWA/",
+  "start_url": "/Real-Estate-PWA/index.html",
+  "scope": "/Real-Estate-PWA/",
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui"],
   "theme_color": "#e8491d",
   "background_color": "#ffffff",
   "icons": [
     {
-      "src": "/Cyprus-Real-Estate-PWA/icon-192x192.png",
+      "src": "/Real-Estate-PWA/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/Cyprus-Real-Estate-PWA/icon-512x512.png",
+      "src": "/Real-Estate-PWA/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
