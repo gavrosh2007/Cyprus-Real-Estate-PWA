@@ -170,12 +170,31 @@
             border: none;
             color: white;
             cursor: pointer;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             font-weight: bold;
             transition: 0.2s;
             text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
         }
         .add-property-btn:hover { background: rgba(232,73,29,0.9); transform: scale(1.01); }
+        
+        .find-property-btn {
+            background: rgba(255,140,0,0.85);
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            transition: 0.2s;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+        }
+        .find-property-btn:hover {
+            background: rgba(255,140,0,1);
+            transform: scale(1.01);
+        }
         
         .properties-grid {
             display: grid;
@@ -338,7 +357,16 @@
             margin-bottom: 0.8rem;
             border-radius: 12px;
             border: 1px solid rgba(232,73,29,0.5);
-            background: rgba(255,255,255,0.15);
+            background: rgba(0,0,0,0.6);
+            color: white !important;
+        }
+        .modal-content input::placeholder,
+        .modal-content textarea::placeholder {
+            color: #ddd !important;
+            opacity: 1;
+        }
+        .modal-content select option {
+            background: #222;
             color: white;
         }
         .modal-content button {
@@ -410,7 +438,7 @@
             .container { padding: 1rem; }
             .hero-section h1 { font-size: 1.8rem; }
             .instruction-box h3 { font-size: 1.6rem; }
-            .add-property-btn { font-size: 1.1rem; padding: 0.8rem; }
+            .add-property-btn, .find-property-btn { font-size: 1.1rem; padding: 0.8rem; }
             .modal-full { padding: 1rem; }
             .modal-full-content, .modal-content { width: 100%; }
         }
@@ -454,6 +482,7 @@
             </ul>
         </div>
         <button class="add-property-btn" id="addPropertyBtnRu">➕ Выставить недвижимость на продажу</button>
+        <button class="find-property-btn" id="findPropertyBtnRu">🔍 Найти свой дом</button>
         <h2 id="propertiesTitleRu" style="color:#e8491d; text-shadow: 1px 1px 0 rgba(0,0,0,0.5);">📋 Объекты на продажу</h2>
         <div id="propertiesGrid" class="properties-grid"></div>
         
@@ -480,6 +509,7 @@
             </ul>
         </div>
         <button class="add-property-btn" id="addPropertyBtnEn">➕ List property for sale</button>
+        <button class="find-property-btn" id="findPropertyBtnEn">🔍 Find your home</button>
         <h2 id="propertiesTitleEn" style="color:#e8491d; text-shadow: 1px 1px 0 rgba(0,0,0,0.5);">📋 Properties for sale</h2>
         <div id="propertiesGridEn" class="properties-grid"></div>
         
@@ -497,7 +527,7 @@
     <footer><span id="footerText">© 2025 Недвижимость | Все объявления добавляются пользователями</span></footer>
 </div>
 
-<!-- Модалка добавления -->
+<!-- Модалка добавления (продажа) -->
 <div id="propertyModal" class="modal">
     <div class="modal-content">
         <h3 id="modalTitle">📝 Заполните анкету</h3>
@@ -518,6 +548,20 @@
         <div id="photoPreview" class="photo-preview"></div>
         
         <button id="submitProperty">✅ Опубликовать</button>
+        <button class="close-modal">✖ Закрыть</button>
+    </div>
+</div>
+
+<!-- Модалка поиска (покупка) -->
+<div id="findModal" class="modal">
+    <div class="modal-content">
+        <h3 id="findModalTitle">📝 Заявка на покупку</h3>
+        <input type="text" id="findName" placeholder="Ваше имя *">
+        <input type="text" id="findPhone" placeholder="Телефон *">
+        <input type="text" id="findBudget" placeholder="Бюджет (€)">
+        <input type="text" id="findLocation" placeholder="Желаемая локация">
+        <textarea id="findComment" rows="3" placeholder="Комментарий / пожелания"></textarea>
+        <button id="submitFindRequest">📩 Отправить заявку</button>
         <button class="close-modal">✖ Закрыть</button>
     </div>
 </div>
@@ -571,7 +615,9 @@
             listBtn: 'Список', ownersModalTitle: '👥 Выберите владельца',
             staticLinksTitle: 'Фотографии и документы дома:',
             staticLinkRu: 'Русская версия сайта',
-            staticLinkEn: 'Английская версия сайта'
+            staticLinkEn: 'Английская версия сайта',
+            findBtn: '🔍 Найти свой дом', findModalTitle: '📝 Заявка на покупку', findSubmit: '📩 Отправить заявку', findSuccess: '✅ Ваша заявка отправлена. Мы свяжемся с вами!',
+            findNamePlaceholder: 'Ваше имя *', findPhonePlaceholder: 'Телефон *', findBudgetPlaceholder: 'Бюджет (€)', findLocationPlaceholder: 'Желаемая локация', findCommentPlaceholder: 'Комментарий / пожелания'
         },
         en: {
             pwaBtn: 'Install', pwaTooltip: 'Install app', pwaNote: 'Click monitor icon', footer: '© 2025 Real Estate | All listings are user-submitted',
@@ -587,7 +633,9 @@
             listBtn: 'List', ownersModalTitle: '👥 Select owner',
             staticLinksTitle: 'Property photos and documents:',
             staticLinkRu: 'Russian version',
-            staticLinkEn: 'English version'
+            staticLinkEn: 'English version',
+            findBtn: '🔍 Find your home', findModalTitle: '📝 Purchase request', findSubmit: '📩 Send request', findSuccess: '✅ Your request has been sent. We will contact you!',
+            findNamePlaceholder: 'Your name *', findPhonePlaceholder: 'Phone *', findBudgetPlaceholder: 'Budget (€)', findLocationPlaceholder: 'Desired location', findCommentPlaceholder: 'Comment / wishes'
         }
     };
 
@@ -625,6 +673,15 @@
         const sel = document.getElementById('ownership');
         sel.options[0].text = t.fieldPersonal;
         sel.options[1].text = t.fieldThird;
+        
+        document.getElementById('findModalTitle').textContent = t.findModalTitle;
+        document.getElementById('submitFindRequest').textContent = t.findSubmit;
+        document.getElementById('findName').placeholder = t.findNamePlaceholder;
+        document.getElementById('findPhone').placeholder = t.findPhonePlaceholder;
+        document.getElementById('findBudget').placeholder = t.findBudgetPlaceholder;
+        document.getElementById('findLocation').placeholder = t.findLocationPlaceholder;
+        document.getElementById('findComment').placeholder = t.findCommentPlaceholder;
+        document.querySelector('#findModal .close-modal').textContent = t.closeBtn;
     }
 
     function setLanguage(lang) {
@@ -644,6 +701,8 @@
         labels.forEach(l => { if(document.getElementById(l+'Ru')) document.getElementById(l+'Ru').textContent = t[l]; if(document.getElementById(l+'En')) document.getElementById(l+'En').textContent = t[l]; });
         document.getElementById('addPropertyBtnRu').textContent = t.addBtn;
         document.getElementById('addPropertyBtnEn').textContent = t.addBtn;
+        document.getElementById('findPropertyBtnRu').textContent = t.findBtn;
+        document.getElementById('findPropertyBtnEn').textContent = t.findBtn;
         if(document.querySelector('#ru-content .site-contacts h3')) document.querySelector('#ru-content .site-contacts h3').textContent = t.contactsTitle;
         if(document.querySelector('#en-content .site-contacts h3')) document.querySelector('#en-content .site-contacts h3').textContent = t.contactsTitle;
         updateModalLanguage();
@@ -662,28 +721,26 @@
             properties = JSON.parse(saved);
             let changed = false;
             
-            // Ищем главный объект (по локации или имени)
             const mainProperty = properties.find(p => p.location === "Pyrgos, Limassol" || p.name === "Владелец");
             if (mainProperty && (!mainProperty.photos || mainProperty.photos.length === 0 || mainProperty.photos[0] === PLACEHOLDER_SVG)) {
-                mainProperty.photos = ["house.jpg"];  // ← Если файл house.jpeg, замените здесь на "house.jpeg"
+                mainProperty.photos = ["house.jpg"];
                 changed = true;
             }
             
-            // Добавляем второй объект-заглушку, если нет
             const hasSecond = properties.some(p => p.photos && p.photos[0] === "1.jpeg");
             if (!hasSecond) {
                 properties.push({
                     id: Date.now() + 1,
-                    name: "Заглушка",
+                    name: "",
                     ownership: "personal",
-                    price: "500,000",
-                    location: "Новая локация",
-                    area: "200",
-                    landArea: "300",
-                    contact: "+357 12345678",
+                    price: "",
+                    location: "",
+                    area: "",
+                    landArea: "",
+                    contact: "",
                     photos: ["1.jpeg"],
                     docLink: "",
-                    createdAt: new Date().toLocaleDateString()
+                    createdAt: ""
                 });
                 changed = true;
             }
@@ -700,22 +757,22 @@
                     area: "350",
                     landArea: "600",
                     contact: "+357 99453575",
-                    photos: ["house.jpg"],  // ← здесь тоже при необходимости замените на "house.jpeg"
+                    photos: ["house.jpg"],
                     docLink: "",
                     createdAt: new Date().toLocaleDateString()
                 },
                 {
                     id: Date.now() + 1,
-                    name: "Заглушка",
+                    name: "",
                     ownership: "personal",
-                    price: "500,000",
-                    location: "Новая локация",
-                    area: "200",
-                    landArea: "300",
-                    contact: "+357 12345678",
+                    price: "",
+                    location: "",
+                    area: "",
+                    landArea: "",
+                    contact: "",
                     photos: ["1.jpeg"],
                     docLink: "",
-                    createdAt: new Date().toLocaleDateString()
+                    createdAt: ""
                 }
             ];
             saveProperties();
@@ -743,16 +800,23 @@
         const cardHTML = (p, lang) => {
             const ownText = lang === 'ru' ? (p.ownership === 'personal' ? 'личная' : 'по доверенности') : (p.ownership === 'personal' ? 'personal' : 'by proxy');
             const photoUrl = (p.photos && p.photos[0]) ? p.photos[0] : PLACEHOLDER_SVG;
+            const displayName = p.name || (lang === 'ru' ? '—' : '—');
+            const displayPrice = p.price ? `€${p.price}` : (lang === 'ru' ? 'Цена не указана' : 'Price not specified');
+            const displayLocation = p.location || (lang === 'ru' ? 'Локация не указана' : 'Location not specified');
+            const displayArea = p.area ? `${p.area} м²` : (lang === 'ru' ? 'Площадь не указана' : 'Area not specified');
+            const displayLand = p.landArea ? `${p.landArea} м²` : '';
+            const displayContact = p.contact || (lang === 'ru' ? 'Контакт не указан' : 'Contact not specified');
+            const displayDate = p.createdAt || (lang === 'ru' ? 'Дата не указана' : 'Date not specified');
             return `
             <div class="property-card" onclick='viewProperty(${JSON.stringify(p).replace(/'/g, "\\'")})'>
                 <div class="property-img"><img src="${photoUrl}" alt="Фото" onerror="this.src='${PLACEHOLDER_SVG}'"></div>
                 <div class="property-info">
-                    <div class="property-title">${escapeHtml(p.location)}</div>
-                    <div class="property-price">€${p.price}</div>
-                    <div class="property-details">📐 ${p.area} м² ${p.landArea ? `+ участок ${p.landArea} м²` : ''}</div>
-                    <div class="property-details">👤 ${escapeHtml(p.name)} | ${ownText}</div>
-                    <div class="property-details">📞 ${p.contact}</div>
-                    <div class="property-details">📅 ${p.createdAt}</div>
+                    <div class="property-title">${escapeHtml(displayLocation)}</div>
+                    <div class="property-price">${displayPrice}</div>
+                    <div class="property-details">📐 ${displayArea} ${displayLand ? `+ участок ${displayLand}` : ''}</div>
+                    <div class="property-details">👤 ${escapeHtml(displayName)} | ${ownText}</div>
+                    <div class="property-details">📞 ${displayContact}</div>
+                    <div class="property-details">📅 ${displayDate}</div>
                     <button class="delete-btn" onclick="event.stopPropagation(); deleteProperty(${p.id})">🗑 ${lang === 'ru' ? 'Удалить' : 'Delete'}</button>
                 </div>
             </div>`;
@@ -767,8 +831,18 @@
         const t = translations[currentLang];
         const ownText = prop.ownership === 'personal' ? t.fieldPersonal : t.fieldThird;
         const photoUrl = (prop.photos && prop.photos[0]) ? prop.photos[0] : PLACEHOLDER_SVG;
-        const contactsHtml = prop.contact ? `<div class="property-details"><strong>📞 ${t.fieldContact}:</strong> ${prop.contact}</div>` : '';
-        const staticLinksHtml = `
+        const displayName = prop.name || (currentLang === 'ru' ? '—' : '—');
+        const displayPrice = prop.price ? `€${prop.price}` : (currentLang === 'ru' ? 'Цена не указана' : 'Price not specified');
+        const displayLocation = prop.location || (currentLang === 'ru' ? 'Локация не указана' : 'Location not specified');
+        const displayArea = prop.area ? `${prop.area} м²` : (currentLang === 'ru' ? 'Площадь не указана' : 'Area not specified');
+        const displayLand = prop.landArea ? `${prop.landArea} м²` : '';
+        const displayContact = prop.contact || (currentLang === 'ru' ? 'Контакт не указан' : 'Contact not specified');
+        const displayDate = prop.createdAt || (currentLang === 'ru' ? 'Дата не указана' : 'Date not specified');
+        const contactsHtml = `<div class="property-details"><strong>📞 ${t.fieldContact}:</strong> ${displayContact}</div>`;
+        
+        // Ссылки на статические сайты показываем ТОЛЬКО для первой карточки (где есть фото house.jpg или локация Pyrgos)
+        const isMainProperty = (prop.photos && prop.photos[0] === "house.jpg") || prop.location === "Pyrgos, Limassol";
+        const staticLinksHtml = isMainProperty ? `
             <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(232,73,29,0.5); text-align: center;">
                 <p><strong>${t.staticLinksTitle}</strong></p>
                 <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 0.5rem;">
@@ -776,17 +850,18 @@
                     <a href="${STATIC_SITE_EN}" target="_blank" style="color:#e8491d;">🌐 ${t.staticLinkEn}</a>
                 </div>
             </div>
-        `;
+        ` : '';
+        
         const content = `
             <div class="detail-photo"><img src="${photoUrl}" onerror="this.src='${PLACEHOLDER_SVG}'" alt="Фото объекта"></div>
-            <div class="property-details"><strong>${t.fieldName}:</strong> ${escapeHtml(prop.name)}</div>
+            <div class="property-details"><strong>${t.fieldName}:</strong> ${escapeHtml(displayName)}</div>
             <div class="property-details"><strong>${t.fieldOwnership}:</strong> ${ownText}</div>
-            <div class="property-details"><strong>${t.fieldPrice}:</strong> €${prop.price}</div>
-            <div class="property-details"><strong>${t.fieldLocation}:</strong> ${escapeHtml(prop.location)}</div>
-            <div class="property-details"><strong>${t.fieldArea}:</strong> ${prop.area} м²</div>
-            ${prop.landArea ? `<div class="property-details"><strong>${t.fieldLandArea}:</strong> ${prop.landArea} м²</div>` : ''}
+            <div class="property-details"><strong>${t.fieldPrice}:</strong> ${displayPrice}</div>
+            <div class="property-details"><strong>${t.fieldLocation}:</strong> ${escapeHtml(displayLocation)}</div>
+            <div class="property-details"><strong>${t.fieldArea}:</strong> ${displayArea}</div>
+            ${prop.landArea ? `<div class="property-details"><strong>${t.fieldLandArea}:</strong> ${displayLand}</div>` : ''}
             ${contactsHtml}
-            <div class="property-details"><strong>${t.fieldCreated}:</strong> ${prop.createdAt}</div>
+            <div class="property-details"><strong>${t.fieldCreated}:</strong> ${displayDate}</div>
             ${prop.docLink ? `<div class="property-details"><strong>${t.fieldDocs}:</strong> <a href="${prop.docLink}" target="_blank">📄</a></div>` : ''}
             ${staticLinksHtml}
         `;
@@ -833,13 +908,33 @@
     document.getElementById('listOwnerBtn')?.addEventListener('click', showOwnersModal);
     document.getElementById('addPropertyBtnRu')?.addEventListener('click', () => document.getElementById('propertyModal').classList.add('active'));
     document.getElementById('addPropertyBtnEn')?.addEventListener('click', () => document.getElementById('propertyModal').classList.add('active'));
+    document.getElementById('findPropertyBtnRu')?.addEventListener('click', () => document.getElementById('findModal').classList.add('active'));
+    document.getElementById('findPropertyBtnEn')?.addEventListener('click', () => document.getElementById('findModal').classList.add('active'));
     document.querySelectorAll('.close-modal').forEach(btn => btn.addEventListener('click', (e) => {
         document.getElementById('propertyModal').classList.remove('active');
         document.getElementById('ownersModal').classList.remove('active');
+        document.getElementById('findModal').classList.remove('active');
     }));
     window.addEventListener('click', (e) => {
         if (e.target === document.getElementById('propertyModal')) document.getElementById('propertyModal').classList.remove('active');
         if (e.target === document.getElementById('ownersModal')) document.getElementById('ownersModal').classList.remove('active');
+        if (e.target === document.getElementById('findModal')) document.getElementById('findModal').classList.remove('active');
+    });
+
+    document.getElementById('submitFindRequest')?.addEventListener('click', () => {
+        const name = document.getElementById('findName').value.trim();
+        const phone = document.getElementById('findPhone').value.trim();
+        if (!name || !phone) {
+            alert(translations[currentLang].emptyFields);
+            return;
+        }
+        alert(translations[currentLang].findSuccess);
+        document.getElementById('findName').value = '';
+        document.getElementById('findPhone').value = '';
+        document.getElementById('findBudget').value = '';
+        document.getElementById('findLocation').value = '';
+        document.getElementById('findComment').value = '';
+        document.getElementById('findModal').classList.remove('active');
     });
 
     let selectedFiles = [];
@@ -847,27 +942,30 @@
     const fileInput = document.getElementById('fileInput');
     const photoPreviewDiv = document.getElementById('photoPreview');
     
-    dropzone.addEventListener('click', () => fileInput.click());
-    dropzone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dropzone.classList.add('drag-over');
-    });
-    dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'));
-    dropzone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropzone.classList.remove('drag-over');
-        const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
-        if (files.length) addFiles(files);
-    });
-    fileInput.addEventListener('change', (e) => {
-        if (e.target.files.length) addFiles(Array.from(e.target.files));
-    });
+    if (dropzone) {
+        dropzone.addEventListener('click', () => fileInput.click());
+        dropzone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropzone.classList.add('drag-over');
+        });
+        dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'));
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('drag-over');
+            const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+            if (files.length) addFiles(files);
+        });
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) addFiles(Array.from(e.target.files));
+        });
+    }
     
     function addFiles(files) {
         selectedFiles = [...selectedFiles, ...files];
         updatePreview();
     }
     function updatePreview() {
+        if (!photoPreviewDiv) return;
         photoPreviewDiv.innerHTML = '';
         selectedFiles.forEach((file, idx) => {
             const reader = new FileReader();
