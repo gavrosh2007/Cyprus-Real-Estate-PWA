@@ -1,6 +1,6 @@
 {
-  "name": "Недвижимость",
-  "short_name": "Estate",
+  "name": "HM&RE Real Estate",
+  "short_name": "HM&RE",
   "start_url": "/Real-Estate-PWA/index.html",
   "scope": "/Real-Estate-PWA/",
   "display": "standalone",
