@@ -88,7 +88,16 @@
             color: #fff;
         }
         .lang-btn.active { background: #e8491d; }
-        .install-area { text-align: center; margin: 1rem 0 2rem; }
+        
+        /* PWA кнопка: центрирование */
+        .install-area {
+            text-align: center;
+            margin: 1rem auto 2rem auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
         .install-tooltip { position: relative; display: inline-block; }
         .pwa-icon-btn {
             background: none;
@@ -120,6 +129,11 @@
         }
         .install-tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
         .install-note { margin-top: 0.5rem; font-size: 0.7rem; color: #ccc; }
+        @media (max-width: 600px) {
+            .pwa-icon-btn img { width: 64px; height: 64px; }
+            .tooltip-text { white-space: normal; width: 200px; bottom: 130%; }
+        }
+        
         .hero-section {
             background: rgba(0,0,0,0.4);
             backdrop-filter: blur(8px);
@@ -1047,7 +1061,7 @@
     setLanguage('ru');
     bindInstructionButtons();
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(err => console.warn('SW registration failed:', err));
+        navigator.serviceWorker.register('sw.js', { scope: './' }).catch(err => console.warn('SW registration failed:', err));
     }
 </script>
 </body>
